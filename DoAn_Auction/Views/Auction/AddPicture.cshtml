@@ -1,0 +1,116 @@
+﻿@section title
+{
+    Đăng đấu giá
+}
+@section css
+{
+    <link href="~/assets/bootstrap-datepicker-master/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/assets/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" />
+<link href="~/assets/kartik-bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+
+    <style type="text/css">
+        /*#lblTimeEnd{
+            display:block;
+        }
+        #txtTimeEnd {
+            display:inline;
+        }
+        .p{
+            display:inline;
+            float: none;
+        }*/
+    </style>
+}
+@section js
+{
+    <script src="~/assets/js/bootstrap-select.js"></script>
+    <script src="~/assets/tinymce/tinymce.min.js"></script>
+    <script src="~/assets/bootstrap.file-input.js"></script>
+    <script src="~/assets/jquery-validation-1.16.0/jquery.validate.min.js"></script>
+    <script src="~/assets/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/mimity.js"></script>
+    <script src="~/assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="~/assets/kartik-bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="~/assets/kartik-bootstrap-fileinput/themes/fa/theme.js"></script>
+<script src="~/assets/kartik-bootstrap-fileinput/themes/fa/theme.min.js"></script>
+
+    <script>
+        //$('input[type=file]').bootstrapFileInput();
+        $("#input-main").fileinput({
+            theme: "fa",
+            maxFileSize: 4096,
+            allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+        });
+        $("#input-fa").fileinput({
+            theme: "fa",
+            maxFileSize: 2048,
+            uploadUrl: "/file-upload-batch/2",
+            allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+        });
+        
+    </script>
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Đấu giá</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+<!-- Main Content -->
+<div class="container m-t-3">
+    <div class="row">
+        @if (ViewBag.ErrorMsg == null)
+        {
+            ViewBag.ErrorMsg = TempData["ErrorMsg"];
+            TempData["ErrorMsg"] = null;
+        }
+        @if (@ViewBag.ErrorMsg != null)
+        {
+            <div class="form-group col-md-12 ">
+                <div class="alert alert-warning">
+                    <strong>Warning! </strong>@ViewBag.ErrorMsg
+                </div>
+            </div>
+        }
+        @if (@ViewBag.Success != null)
+        {
+            <div class="form-group col-md-12 ">
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            </div>
+        }
+        <!-- Checkout Form -->
+        <div class="col-md-9">
+            <div class="title"><span>Đăng đấu giá mới</span></div>
+            <form method="post" enctype="multipart/form-data">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label class="control-label">Select File</label>
+                        <input id="input-main" name="mainPic" type="file" class="file">
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="control-label">Select File</label>
+                        <input id="input-fa" name="subPic" type="file" multiple class="file-loading">
+                    </div>
+                </div>
+                <nav aria-label="Checkout Next Navigation">
+                    <ul class="pager">
+                        <li class="previous"><a href="cart.html"><span aria-hidden="true">&larr;</span> Back to Shopping Cart</a></li>
+                        <li><button type="submit" class="btn btn-theme"><i class="fa fa-long-arrow-right"></i> Đăng sản phẩm</button></li>
+                        <li class="next"><a href="checkout.html">Confirm Order <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </form>
+        </div>
+        <!-- End Checkout Form -->
+    </div>
+</div>
+<!-- End Main Content -->

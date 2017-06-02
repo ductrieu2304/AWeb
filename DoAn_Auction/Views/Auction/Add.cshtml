@@ -1,0 +1,201 @@
+﻿@section title
+{
+    Đăng đấu giá
+}
+@section css
+{
+    <link href="~/assets/bootstrap-datepicker-master/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/assets/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/assets/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" />
+
+    <style type="text/css">
+        /*#lblTimeEnd{
+            display:block;
+        }
+        #txtTimeEnd {
+            display:inline;
+        }
+        .p{
+            display:inline;
+            float: none;
+        }*/
+    </style>
+}
+@section js
+{
+    <script src="~/assets/js/bootstrap-select.js"></script>
+    <script src="~/assets/tinymce/tinymce.min.js"></script>
+    <script src="~/assets/bootstrap.file-input.js"></script>
+    <script src="~/assets/jquery-validation-1.16.0/jquery.validate.min.js"></script>
+    <script src="~/assets/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/mimity.js"></script>
+    <script src="~/assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+    <script>
+        //$('input[type=file]').bootstrapFileInput();
+
+        tinymce.init({
+            selector: '#txtFullDes',
+            menubar: false,
+            toolbar: "styleselect | bold italic | link image | alignleft aligncenter alignright | bullist numlist | fontselect | fontsizeselect | forecolor backcolor",
+            plugins: 'link image textcolor',
+            encoding: "xml"
+        });
+        $('#txtPriceStarting').TouchSpin({
+            verticalbuttons: true,
+            min: 20000,
+            max: 1000000000,
+            step: 10000,
+            initval: 20000,
+            postfix: 'VND'
+        });
+        $('#txtPriceBuy').TouchSpin({
+            verticalbuttons: true,
+            min: 20000,
+            max: 1000000000,
+            step: 10000,
+            initval: 20000,
+            postfix: 'VND'
+        });
+        $('#txtStep').TouchSpin({
+            verticalbuttons: true,
+            min: 5000,
+            max: 1000000000,
+            step: 5000,
+            initval: 10000,
+            postfix: 'VND'
+        });
+        $('#txtQuantity').TouchSpin({
+            verticalbuttons: true,
+            min: 1,
+            max: 1000,
+            step: 1,
+            initval: 1,
+        });
+        $('#txtRequired').TouchSpin({
+            verticalbuttons: true,
+            min: 1,
+            max: 100,
+            step: 1,
+            initval: 50,
+            postfix: '%'
+        });
+        $('#txtTimeEnd').TouchSpin({
+            verticalbuttons: true,
+            min: 1,
+            max: 15,
+            step: 1,
+            initval: 3,
+            postfix: 'ngày kể từ ngày đăng '
+        });
+    </script>
+}
+
+<!-- Breadcrumbs -->
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li class="active">Đấu giá</li>
+        </ol>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+<!-- Main Content -->
+<div class="container m-t-3">
+    <div class="row">
+        @if (ViewBag.ErrorMsg == null)
+        {
+            ViewBag.ErrorMsg = TempData["ErrorMsg"];
+            TempData["ErrorMsg"] = null;
+        }
+        @if (@ViewBag.ErrorMsg != null)
+        {
+            <div class="form-group col-md-12 ">
+                <div class="alert alert-warning">
+                    <strong>Warning! </strong>@ViewBag.ErrorMsg
+                </div>
+            </div>
+        }
+        @if (@ViewBag.Success != null)
+        {
+            <div class="form-group col-md-12 ">
+                <div class="alert alert-success">
+                    @ViewBag.Success
+                </div>
+            </div>
+        }
+        <!-- Checkout Form -->
+        <div class="col-md-9">
+            <div class="title"><span>Đăng đấu giá mới</span></div>
+            <form method="post">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label for="txtProName">Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="txtProName" placeholder="Tên sản phẩm" name="ProName">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="cboCatID">Loại sản phẩm</label>
+                        <select class="form-control selectpicker" id="cboCatID" data-live-search="true" name="CatID">
+                            @*<option value=""> --- Please Select --- </option>*@
+                            @foreach (var cat in ViewBag.Parent)
+                            {
+                                <optgroup label="@cat.CatName">
+                                    @foreach (var cat_child in cat.Categories)
+                                    {
+                                        <option value="@cat_child.CatID">@cat_child.CatName</option>
+                                    }
+                                </optgroup>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="txtPriceStarting">Giá khởi điểm</label>
+                        <input type="text" class="form-control" id="txtPriceStarting" placeholder="Giá khởi điểm" name="PriceStarting">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="txtPriceBuy">Giá mua ngay</label>
+                        <input type="text" class="form-control" id="txtPriceBuy" placeholder="Giá mua ngay" name="PriceBuy">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="txtStep">Bước giá</label>
+                        <input type="text" class="form-control" id="txtStep" placeholder="Bước giá" name="Step">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="txtQuantity">Số lượng</label>
+                        <input type="text" class="form-control" id="txtQuantity" placeholder="Số lượng" name="Quantity">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="txtRequired">Yêu cầu rating</label>
+                        <input type="text" class="form-control" id="txtRequired" placeholder="Yêu cầu về điểm rating của người đấu giá" name="Required">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label id="lblTimeEnd" for="txtTimeEnd">Thời gian kết thúc</label>
+                        <input type="text" class="form-control form-inline" id="txtTimeEnd" placeholder="5" name="TimeEnd">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="fuMain">Hỉnh đại diện</label>
+                        <input type="file" class="form-control" id="fuMain" placeholder="" name="fuMain">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="fuThumbs">Hỉnh chi tiết</label>
+                        <input type="file" class="form-control" id="fuThumbs" placeholder="" name="fuThumbs" multiple>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label for="addressInput">Mô tả chi tiết</label>
+                        <textarea class="form-control" rows="3" id="txtFullDes" name="FullDes"></textarea>
+                    </div>
+                </div>
+                <nav aria-label="Checkout Next Navigation">
+                    <ul class="pager">
+                        <li class="previous"><a href="cart.html"><span aria-hidden="true">&larr;</span> Back to Shopping Cart</a></li>
+                        <li><button type="submit" class="btn btn-theme"><i class="fa fa-long-arrow-right"></i> Đăng sản phẩm</button></li>
+                        <li class="next"><a href="checkout.html">Confirm Order <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </form>
+        </div>
+        <!-- End Checkout Form -->
+    </div>
+</div>
+<!-- End Main Content -->

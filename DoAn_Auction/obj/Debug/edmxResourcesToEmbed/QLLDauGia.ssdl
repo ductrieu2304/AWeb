@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QLDauGia.dbo.Auctions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Auctions">
+    <Key>
+      <PropertyRef Name="ProID" />
+    </Key>
+    <Property Name="ProID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProName" Type="nvarchar" MaxLength="40" />
+    <Property Name="TinyDes" Type="nvarchar" MaxLength="40" />
+    <Property Name="FullDes" Type="ntext" />
+    <Property Name="PriceStarting" Type="money" />
+    <Property Name="PriceBuy" Type="money" />
+    <Property Name="Quantity" Type="nchar" MaxLength="10" />
+    <Property Name="CatID" Type="int" />
+    <Property Name="PriceHighest" Type="money" />
+    <Property Name="Customer" Type="int" />
+    <Property Name="TimeStart" Type="datetime" />
+    <Property Name="TimeEnd" Type="datetime" />
+    <Property Name="Adjourning" Type="bit" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="f_ID" />
+    </Key>
+    <Property Name="f_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f_Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_Password" Type="nvarchar" MaxLength="255" />
+    <Property Name="f_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_DOB" Type="datetime" />
+    <Property Name="f_Level" Type="int" />
+    <Property Name="f_Money" Type="money" />
+    <Property Name="f_Rate" Type="int" />
+  </EntityType>
+  <EntityContainer Name="QLDauGiaModelStoreContainer">
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Auctions" EntityType="Self.Auctions" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Auctions].[ProID] AS [ProID], 
+    [Auctions].[ProName] AS [ProName], 
+    [Auctions].[TinyDes] AS [TinyDes], 
+    [Auctions].[FullDes] AS [FullDes], 
+    [Auctions].[PriceStarting] AS [PriceStarting], 
+    [Auctions].[PriceBuy] AS [PriceBuy], 
+    [Auctions].[Quantity] AS [Quantity], 
+    [Auctions].[CatID] AS [CatID], 
+    [Auctions].[PriceHighest] AS [PriceHighest], 
+    [Auctions].[Customer] AS [Customer], 
+    [Auctions].[TimeStart] AS [TimeStart], 
+    [Auctions].[TimeEnd] AS [TimeEnd], 
+    [Auctions].[Adjourning] AS [Adjourning]
+    FROM [dbo].[Auctions] AS [Auctions]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

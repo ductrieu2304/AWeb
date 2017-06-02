@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDauGiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="f_ID" />
+    </Key>
+    <Property Name="f_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="f_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="f_DOB" Type="DateTime" Precision="3" />
+    <Property Name="f_Level" Type="Int32" />
+    <Property Name="f_Money" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="f_Rate" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Auction">
+    <Key>
+      <PropertyRef Name="ProID" />
+    </Key>
+    <Property Name="ProID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="TinyDes" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="FullDes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PriceStarting" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PriceBuy" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CatID" Type="Int32" />
+    <Property Name="PriceHighest" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Customer" Type="Int32" />
+    <Property Name="TimeStart" Type="DateTime" Precision="3" />
+    <Property Name="TimeEnd" Type="DateTime" Precision="3" />
+    <Property Name="Adjourning" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="QLDauGiaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Auctions" EntityType="Self.Auction" />
+  </EntityContainer>
+</Schema>
