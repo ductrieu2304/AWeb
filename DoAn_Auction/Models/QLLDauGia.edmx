@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auctions">
           <Key>
             <PropertyRef Name="ProID" />
@@ -54,56 +54,11 @@
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QLDauGiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="f_ID" />
-          </Key>
-          <Property Name="f_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="f_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="f_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="f_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="f_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="f_DOB" Type="DateTime" Precision="3" />
-          <Property Name="f_Level" Type="Int32" />
-          <Property Name="f_Rate" Type="Int32" />
-          <Property Name="f_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="f_Phone" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="QLDauGiaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="Categories" EntityType="QLDauGiaModel.Category" />
-          <AssociationSet Name="CategoryCategory" Association="QLDauGiaModel.CategoryCategory">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Category1" EntitySet="Categories" />
-          </AssociationSet>
-          <EntitySet Name="Auctions" EntityType="QLDauGiaModel.Auction" />
-        </EntityContainer>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="CatID" />
-          </Key>
-          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CatName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ParentID" Type="Int32" />
-          <NavigationProperty Name="Categories" Relationship="QLDauGiaModel.CategoryCategory" FromRole="Category" ToRole="Category1" />
-          <NavigationProperty Name="Category1" Relationship="QLDauGiaModel.CategoryCategory" FromRole="Category1" ToRole="Category" />
-        </EntityType>
-        <Association Name="CategoryCategory">
-          <End Type="QLDauGiaModel.Category" Role="Category" Multiplicity="0..1" />
-          <End Type="QLDauGiaModel.Category" Role="Category1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="CatID" />
-            </Principal>
-            <Dependent Role="Category1">
-              <PropertyRef Name="ParentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+      <Schema Namespace="QLDauGiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Auction">
           <Key>
             <PropertyRef Name="ProID" />
@@ -125,17 +80,74 @@
           <Property Name="Seller" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
         </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="f_ID" />
+          </Key>
+          <Property Name="f_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f_Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f_Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="f_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f_DOB" Type="DateTime" Precision="3" />
+          <Property Name="f_Level" Type="Int32" />
+          <Property Name="f_Rate" Type="Int32" />
+          <Property Name="f_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="f_Phone" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="QLDauGiaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auctions" EntityType="Self.Auction" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QLDauGiaModelStoreContainer" CdmEntityContainer="QLDauGiaEntities">
+          <EntitySetMapping Name="Auctions">
+            <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
+              <MappingFragment StoreEntitySet="Auctions">
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ProName" ColumnName="ProName" />
+                <ScalarProperty Name="FullDes" ColumnName="FullDes" />
+                <ScalarProperty Name="PriceStarting" ColumnName="PriceStarting" />
+                <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="PriceHighest" ColumnName="PriceHighest" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="Adjourning" ColumnName="Adjourning" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="Seller" ColumnName="Seller" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="QLDauGiaModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="QLDauGiaModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="f_Phone" ColumnName="f_Phone" />
-                <ScalarProperty Name="f_Address" ColumnName="f_Address" />
                 <ScalarProperty Name="f_ID" ColumnName="f_ID" />
                 <ScalarProperty Name="f_Username" ColumnName="f_Username" />
                 <ScalarProperty Name="f_Password" ColumnName="f_Password" />
@@ -144,37 +156,8 @@
                 <ScalarProperty Name="f_DOB" ColumnName="f_DOB" />
                 <ScalarProperty Name="f_Level" ColumnName="f_Level" />
                 <ScalarProperty Name="f_Rate" ColumnName="f_Rate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="QLDauGiaModel.Category">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="CatName" ColumnName="CatName" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Auctions">
-            <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
-              <MappingFragment StoreEntitySet="Auctions">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Seller" ColumnName="Seller" />
-                <ScalarProperty Name="Step" ColumnName="Step" />
-                <ScalarProperty Name="Required" ColumnName="Required" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Adjourning" ColumnName="Adjourning" />
-                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
-                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
-                <ScalarProperty Name="Customer" ColumnName="Customer" />
-                <ScalarProperty Name="PriceHighest" ColumnName="PriceHighest" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
-                <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
-                <ScalarProperty Name="PriceStarting" ColumnName="PriceStarting" />
-                <ScalarProperty Name="FullDes" ColumnName="FullDes" />
-                <ScalarProperty Name="ProName" ColumnName="ProName" />
-                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="f_Address" ColumnName="f_Address" />
+                <ScalarProperty Name="f_Phone" ColumnName="f_Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

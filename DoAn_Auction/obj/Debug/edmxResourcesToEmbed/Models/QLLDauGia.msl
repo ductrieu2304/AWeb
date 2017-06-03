@@ -1,11 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QLDauGiaModelStoreContainer" CdmEntityContainer="QLDauGiaEntities">
+    <EntitySetMapping Name="Auctions">
+      <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
+        <MappingFragment StoreEntitySet="Auctions">
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="ProName" ColumnName="ProName" />
+          <ScalarProperty Name="FullDes" ColumnName="FullDes" />
+          <ScalarProperty Name="PriceStarting" ColumnName="PriceStarting" />
+          <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="PriceHighest" ColumnName="PriceHighest" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+          <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+          <ScalarProperty Name="Adjourning" ColumnName="Adjourning" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="Seller" ColumnName="Seller" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="QLDauGiaModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="CatName" ColumnName="CatName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="QLDauGiaModel.User">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="f_Phone" ColumnName="f_Phone" />
-          <ScalarProperty Name="f_Address" ColumnName="f_Address" />
           <ScalarProperty Name="f_ID" ColumnName="f_ID" />
           <ScalarProperty Name="f_Username" ColumnName="f_Username" />
           <ScalarProperty Name="f_Password" ColumnName="f_Password" />
@@ -14,37 +43,8 @@
           <ScalarProperty Name="f_DOB" ColumnName="f_DOB" />
           <ScalarProperty Name="f_Level" ColumnName="f_Level" />
           <ScalarProperty Name="f_Rate" ColumnName="f_Rate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="QLDauGiaModel.Category">
-        <MappingFragment StoreEntitySet="Categories">
-          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-          <ScalarProperty Name="CatName" ColumnName="CatName" />
-          <ScalarProperty Name="CatID" ColumnName="CatID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Auctions">
-      <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
-        <MappingFragment StoreEntitySet="Auctions">
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Seller" ColumnName="Seller" />
-          <ScalarProperty Name="Step" ColumnName="Step" />
-          <ScalarProperty Name="Required" ColumnName="Required" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Adjourning" ColumnName="Adjourning" />
-          <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
-          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
-          <ScalarProperty Name="Customer" ColumnName="Customer" />
-          <ScalarProperty Name="PriceHighest" ColumnName="PriceHighest" />
-          <ScalarProperty Name="CatID" ColumnName="CatID" />
-          <ScalarProperty Name="PriceBuy" ColumnName="PriceBuy" />
-          <ScalarProperty Name="PriceStarting" ColumnName="PriceStarting" />
-          <ScalarProperty Name="FullDes" ColumnName="FullDes" />
-          <ScalarProperty Name="ProName" ColumnName="ProName" />
-          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="f_Address" ColumnName="f_Address" />
+          <ScalarProperty Name="f_Phone" ColumnName="f_Phone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

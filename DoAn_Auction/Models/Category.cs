@@ -14,16 +14,8 @@ namespace DoAn_Auction.Models
     
     public partial class Category
     {
-        public Category()
-        {
-            this.Categories = new HashSet<Category>();
-        }
-    
         public int CatID { get; set; }
         public string CatName { get; set; }
         public Nullable<int> ParentID { get; set; }
-    
-        public virtual ICollection<Category> Categories { get; set; }
-        public virtual Category Category1 { get; set; }
     }
 }
