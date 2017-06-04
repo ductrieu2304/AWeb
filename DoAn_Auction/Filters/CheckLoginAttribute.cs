@@ -17,13 +17,13 @@ namespace DoAn_Auction.Filters
                 filterContext.Result = new RedirectResult("~/Account/Register");
             }
 
-            if (CurrentContext.GetCurUser().f_Level < 2)
-            {
-                filterContext.Result = new RedirectResult("~/Account/Register");
-                return;
-            }
+            //if (CurrentContext.GetCurUser().f_Level < 2)
+            //{
+            //    filterContext.Result = new RedirectResult("~/Account/Register");
+            //    return;
+            //}
 
-            if(CurrentContext.GetCurUser().f_Level<3)
+            if (CurrentContext.GetCurUser().f_Level < RequiredPermission)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
                 return;

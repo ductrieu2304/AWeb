@@ -4,10 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0b202b83499445ccbed7cc97f6869710" Name="Diagram1">
-        <EntityTypeShape EntityType="QLDauGiaModel.Auction" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLDauGiaModel.Category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLDauGiaModel.User" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="b1f7ad1dbfe348a9b0d393474ab76561" Name="Diagram1">
+        <EntityTypeShape EntityType="QLDauGiaModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDauGiaModel.Category" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="QLDauGiaModel.CategoryCategory" />
+        <EntityTypeShape EntityType="QLDauGiaModel.Auction" Width="1.5" PointX="3.25" PointY="0.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

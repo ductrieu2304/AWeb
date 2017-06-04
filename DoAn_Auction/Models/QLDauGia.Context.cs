@@ -13,10 +13,10 @@ namespace DoAn_Auction.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QLDauGiaEntities : DbContext
+    public partial class QLDauGiaEntities1 : DbContext
     {
-        public QLDauGiaEntities()
-            : base("name=QLDauGiaEntities")
+        public QLDauGiaEntities1()
+            : base("name=QLDauGiaEntities1")
         {
         }
     
@@ -25,8 +25,8 @@ namespace DoAn_Auction.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Auction> Auctions { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
