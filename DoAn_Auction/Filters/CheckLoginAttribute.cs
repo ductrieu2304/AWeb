@@ -15,9 +15,10 @@ namespace DoAn_Auction.Filters
             if (CurrentContext.IsLogged() == false)
             {
                 filterContext.Result = new RedirectResult("~/Account/Register");
+                return;
             }
 
-            //if (CurrentContext.GetCurUser().f_Level < 2)
+            //if (CurrentContext.GetCurUser().f_Level < RequiredPermission)
             //{
             //    filterContext.Result = new RedirectResult("~/Account/Register");
             //    return;

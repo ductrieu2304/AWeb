@@ -24,34 +24,110 @@ namespace DoAn_Auction.Controllers
         // Post: Auction/Add
         [HttpPost]
         //Quan trọng: upload picture, form bên view phải có encytype
-        public ActionResult Add(AuctionVM avm)
+        public ActionResult Add(AuctionVM avm, HttpPostedFileBase mainPic, IEnumerable<HttpPostedFileBase> subPic)
         {
+            QLDauGiaEntities ctx = new QLDauGiaEntities();
+            ViewBag.Parent = ctx.Categories
+                    .Where(c => c.ParentID == 0).ToList();
             Auction u = new Auction
             {
                 ProName = avm.ProName,
                 FullDes = avm.FullDes,
                 PriceStarting = avm.PriceStarting,
                 PriceBuy = avm.PriceBuy,
-                Quantity=avm.Quantity,
-                CatID=avm.CatID,
-                PriceHighest=0,
-                Customer=0,
-                TimeStart=DateTime.Now,
+                Quantity = avm.Quantity,
+                CatID = avm.CatID,
+                PriceHighest = 0,
+                Customer = 0,
+                TimeStart = DateTime.Now,
                 TimeEnd = DateTime.Now.AddDays(avm.TimeEnd),
-                Adjourning=false,
-                Status=true,
-                Required=avm.Required,
-                Step=avm.Step,
-                Seller=1
+                Adjourning = false,
+                Status = true,
+                Required = avm.Required,
+                Step = avm.Step,
+                Seller = 1,
+                PriceCurrent = avm.PriceStarting,
             };
 
             using (QLDauGiaEntities atx = new QLDauGiaEntities())
             {
+
                 atx.Auctions.Add(u);
                 atx.SaveChanges();
-                ViewBag.Success = "Đăng kí thành công";
+                ViewBag.Success = "Đăng đấu giá thành công";
+
+                // Upload picture
+                if (mainPic != null && mainPic.ContentLength > 0)
+                {
+                    //tạo folder chứa hình Images/sp/[ID product]
+                    string spDirPath = Server.MapPath("~/Images/sp");
+                    string targetDirPath = Path.Combine(spDirPath, u.ProID.ToString());
+
+                    string spLargeDirPath = Server.MapPath("~/Images/sp/Large");
+                    string targetLargeDirPath = Path.Combine(spLargeDirPath, u.ProID.ToString());
+
+                    Directory.CreateDirectory(targetDirPath);
+                    Directory.CreateDirectory(targetLargeDirPath);
+                    //
+                    //copy hình main lên
+                    string mainFileName = Path.Combine(targetDirPath, "main.jpg");
+                    WebImage imgMain = new WebImage(mainPic.InputStream);
+                    WebImage imgMainLarge = imgMain;
+                    if (imgMain.Width / 440 > 1 || imgMain.Height / 600 > 1)
+                    {
+                        int mw = imgMain.Width / 440;
+                        int mh = imgMain.Height / 600;
+                        imgMain.Resize(imgMain.Width / mw, imgMain.Height / mh);
+                    }
+                    imgMain.Save(mainFileName, "jpg");
+                    //
+                    //mainPic.SaveAs(mainFileName);
+                    //copy hình zoom main
+                    string imgMainLargeName = Path.Combine(targetLargeDirPath, "main.jpg");
+                    int smw = 1025 / imgMainLarge.Width;
+                    int smh = 1400 / imgMainLarge.Height;
+                    imgMainLarge.Resize(imgMainLarge.Width * smw, imgMainLarge.Height * smh);
+                    imgMainLarge.Save(imgMainLargeName, "jpg");
+                    //
+                    //Sub picture
+                    int i = 0;
+                    foreach (var file in subPic)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            i++;
+
+                            string imgName = Path.Combine(targetDirPath, i.ToString() + ".jpg");
+                            WebImage imgFile = new WebImage(file.InputStream);
+                            WebImage imgLarge = imgFile;
+                            //imgLarge.Equals(imgFile);
+                            if (imgFile.Width / 440 > 1 || imgFile.Height / 600 > 1)
+                            {
+                                int w = imgFile.Width / 440;
+                                int h = imgFile.Height / 600;
+                                imgFile.Resize(imgFile.Width / w, imgFile.Height / h);
+                            }
+                            imgFile.Save(imgName, "jpg");
+                            //file.SaveAs(imgName);
+
+                            string imgLargeName = Path.Combine(targetLargeDirPath, i.ToString());
+                            //WebImage imgLarge = new WebImage(imgFile.);
+                            int sw = 1025 / imgLarge.Width;
+                            int sh = 1400 / imgLarge.Height;
+                            imgLarge.Resize(imgLarge.Width * sw, imgLarge.Height * sh);
+                            imgLarge.Save(imgLargeName, "jpg");
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = "Đăng hình đấu giá không thành công";
+                    return View();
+                }
+
+
             }
-            QLDauGiaEntities ctx = new QLDauGiaEntities();
+            //QLDauGiaEntities ctx = new QLDauGiaEntities();
             ViewBag.Parent = ctx.Categories
                     .Where(c => c.ParentID == 0).ToList();
             return View();
@@ -61,10 +137,10 @@ namespace DoAn_Auction.Controllers
         {
             return View();
         }
-         [HttpPost]
+        [HttpPost]
         public ActionResult AddPicture(HttpPostedFileBase mainPic, IEnumerable<HttpPostedFileBase> subPic)
         {
-            if (mainPic != null && mainPic.ContentLength > 0 )
+            if (mainPic != null && mainPic.ContentLength > 0)
             {
                 //tạo folder chứa hình Images/sp/[ID product]
                 string spDirPath = Server.MapPath("~/Images/sp");
@@ -75,16 +151,28 @@ namespace DoAn_Auction.Controllers
 
                 Directory.CreateDirectory(targetDirPath);
                 Directory.CreateDirectory(targetLargeDirPath);
-
-                //copy hình lên
+                //
+                //copy hình main lên
                 string mainFileName = Path.Combine(targetDirPath, "main.jpg");
-                mainPic.SaveAs(mainFileName);
-                //copy hình zoom
-                string imgLargeName = Path.Combine(targetLargeDirPath, "main.jpg");
-                WebImage imgLarge = new WebImage(mainPic.InputStream);
-                imgLarge.Resize(1000, 1000);
-                imgLarge.Save(imgLargeName, "jpg");
-
+                WebImage imgMain = new WebImage(mainPic.InputStream);
+                WebImage imgMainLarge = imgMain;
+                if (imgMain.Width / 440 > 1 || imgMain.Height / 600 > 1)
+                {
+                    int mw = imgMain.Width / 440;
+                    int mh = imgMain.Height / 600;
+                    imgMain.Resize(imgMain.Width / mw, imgMain.Height / mh);
+                }
+                imgMain.Save(mainFileName, "jpg");
+                //
+                //mainPic.SaveAs(mainFileName);
+                //copy hình zoom main
+                string imgMainLargeName = Path.Combine(targetLargeDirPath, "main.jpg");
+                int smw = 1025 / imgMainLarge.Width;
+                int smh = 1400 / imgMainLarge.Height;
+                imgMainLarge.Resize(imgMainLarge.Width*smw, imgMainLarge.Height*smh);
+                imgMainLarge.Save(imgMainLargeName, "jpg");
+                //
+                //Sub picture
                 int i = 0;
                 foreach (var file in subPic)
                 {
@@ -92,16 +180,28 @@ namespace DoAn_Auction.Controllers
                     {
                         i++;
 
-                        string subFileName = Path.Combine(targetDirPath, i.ToString()+".jpg");
-                        file.SaveAs(subFileName);
+                        string imgName = Path.Combine(targetDirPath, i.ToString() + ".jpg");
+                        WebImage imgFile = new WebImage(file.InputStream);
+                        WebImage imgLarge = imgFile;
+                        //imgLarge.Equals(imgFile);
+                        if (imgFile.Width / 440 > 1 || imgFile.Height / 600 > 1)
+                        {
+                            int w = imgFile.Width / 440;
+                            int h = imgFile.Height / 600;
+                            imgFile.Resize(imgFile.Width / w, imgFile.Height / h);
+                        }
+                        imgFile.Save(imgName, "jpg");
+                        //file.SaveAs(imgName);
 
-                        string subimgLargeName = Path.Combine(targetLargeDirPath, i.ToString());
-                        WebImage subimgLarge = new WebImage(file.InputStream);
-                        subimgLarge.Resize(1000, 1000);
-                        subimgLarge.Save(subimgLargeName, "jpg");
+                        string imgLargeName = Path.Combine(targetLargeDirPath, i.ToString());
+                        //WebImage imgLarge = new WebImage(imgFile.);
+                        int sw = 1025 / imgLarge.Width;
+                        int sh = 1400 / imgLarge.Height;
+                        imgLarge.Resize(imgLarge.Width * sw, imgLarge.Height * sh);
+                        imgLarge.Save(imgLargeName, "jpg");
+                        ViewBag.Success = "thành công";
                     }
                 }
-                ViewBag.Success = "thành công" + i.ToString();
             }
             else
             {

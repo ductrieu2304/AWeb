@@ -14,11 +14,12 @@ namespace DoAn_Auction.Controllers
         {
             return View();
         }
-        public ActionResult loadds()
+
+        QLDauGiaEntities ctx = new QLDauGiaEntities();
+        public ActionResult LoadTOPBID()
         {
-            QLDauGiaEntities ctx = new QLDauGiaEntities();
-            var list = ctx.Auctions.ToList();
-            return PartialView("TOPBidsPartial", list);
+            var list = ctx.Auctions.OrderByDescending(p => p.Customer).Take(4).ToList();
+            return PartialView("TOPBIDPartial", list);
         }
     }
 }

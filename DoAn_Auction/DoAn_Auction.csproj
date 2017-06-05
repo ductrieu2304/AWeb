@@ -222,7 +222,12 @@
     <Content Include="assets\css\style.teal.rounded.css" />
     <Content Include="assets\css\wizard.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\images\demo\brand1.png" />
     <Content Include="assets\images\demo\brand2.png" />
     <Content Include="assets\images\demo\brand3.png" />
@@ -489,7 +494,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="Images\demo\brand1.png" />
     <Content Include="Images\demo\brand2.png" />
     <Content Include="Images\demo\brand3.png" />
@@ -539,13 +543,16 @@
     <Content Include="Images\small\image2.png" />
     <Content Include="Images\small\image3.png" />
     <Content Include="Images\small\image4.png" />
+    <Content Include="Images\sp\2\1.jpg" />
+    <Content Include="Images\sp\2\2.jpg" />
+    <Content Include="Images\sp\2\3.jpg" />
+    <Content Include="Images\sp\2\main.jpg" />
+    <Content Include="Images\sp\Large\2\1.jpeg" />
+    <Content Include="Images\sp\Large\2\2.jpeg" />
+    <Content Include="Images\sp\Large\2\3.jpeg" />
+    <Content Include="Images\sp\Large\2\main.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="assets\fonts\fontawesome-webfont.woff" />
-    <Content Include="assets\fonts\FontAwesome.otf" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <EntityDeploy Include="Models\QLLDauGia.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLLDauGia.Designer.cs</LastGenOutput>
@@ -587,6 +594,9 @@
     <Content Include="assets\kartik-bootstrap-fileinput\package.json" />
     <Content Include="assets\kartik-bootstrap-fileinput\README.md" />
     <Content Include="assets\kartik-bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -728,7 +738,6 @@
     <Content Include="assets\tinymce\themes\modern\theme.min.js" />
     <Content Include="assets\tinymce\tinymce.js" />
     <Content Include="assets\tinymce\tinymce.min.js" />
-    <Content Include="TextFile1.html" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
@@ -737,6 +746,8 @@
     <Compile Include="Controllers\AuctionController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\MCategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\CheckLoginAttribute.cs" />
     <Compile Include="Helpers\CurrentContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -748,6 +759,10 @@
     <Compile Include="Models\Auction.cs">
       <DependentUpon>QLLDauGia.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuctionHistory.cs">
+      <DependentUpon>QLLDauGia.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuctionHistoryVM.cs" />
     <Compile Include="Models\AuctionVM.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>QLLDauGia.tt</DependentUpon>
@@ -797,7 +812,11 @@
     <Content Include="assets\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="assets\tinymce\langs\readme.md" />
     <Content Include="Views\Auction\AddPicture.cshtml" />
-    <Content Include="Views\Home\TOPBidsPartial.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Search\FormPartial.cshtml" />
+    <Content Include="Views\Search\Result.cshtml" />
+    <Content Include="Views\Home\TOPBIDPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

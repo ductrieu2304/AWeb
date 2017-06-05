@@ -1,0 +1,31 @@
+﻿@using DoAn_Auction.Models
+@model List<Auction>
+
+    @foreach (var Pro in Model)
+    {
+        <div class="col-sm-4 col-lg-3 box-product-outer">
+            <div class="box-product">
+                <div class="img-wrapper">
+                    <a href="detail.html">
+                        <img alt="Product" src="/images/sp/@Pro.ProID/main.jpg">
+                    </a>
+                    <div class="tags">
+                        <span class="label-tags"><span class="label label-default arrowed">TOP BID</span></span>
+                    </div>
+                    <div class="option">
+                        <a href="#" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                    </div>
+                </div>
+                <h6><a href="detail.html">@Pro.ProName</a></h6>
+                <div class="price">
+                    <div>@String.Format("{0:n0}", Pro.PriceCurrent) VNĐ</div>
+                    <span class="label label-default">BIDs: @Pro.Customer</span>
+                </div>
+                <div class="rating">
+                    Chỗ để thời gian còn lại
+                </div>
+            </div>
+        </div>
+    }
+
+
