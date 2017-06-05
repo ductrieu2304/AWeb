@@ -33,18 +33,19 @@
     <script src="~/assets/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
     <script src="~/assets/kartik-bootstrap-fileinput/js/fileinput.js"></script>
     <script src="~/assets/kartik-bootstrap-fileinput/themes/fa/theme.js"></script>
-<script src="~/assets/kartik-bootstrap-fileinput/themes/fa/theme.min.js"></script>
+    <script src="~/assets/kartik-bootstrap-fileinput/themes/fa/theme.min.js"></script>
 
     <script>
         //$('input[type=file]').bootstrapFileInput();
         $("#input-main").fileinput({
             theme: "fa",
-            maxFileSize: 4096,
+            maxFileSize: 2048,
             allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
         });
         $("#input-fa").fileinput({
             theme: "fa",
             maxFileSize: 2048,
+            maxFileCount: 3,
             uploadUrl: "/file-upload-batch/2",
             allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
         });
@@ -90,7 +91,6 @@
         <div class="col-md-9">
             <div class="title"><span>Đăng đấu giá mới</span></div>
             <form method="post" enctype="multipart/form-data">
-                <i class="fa fa-trash" aria-hidden="true"></i>
                 <div class="row">
                     <div class="form-group col-sm-12">
                         <label class="control-label">Select File</label>

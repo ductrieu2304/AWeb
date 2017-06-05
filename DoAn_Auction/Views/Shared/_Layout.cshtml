@@ -115,7 +115,8 @@
                 <div class="col-md-3 logo">
                     <a href="@Url.Action("Index","Home")"><img alt="Logo" src="/images/logo-teal.png" class="img-responsive" /></a>
                 </div>
-                <div class="col-sm-8 col-md-6 search-box m-t-2">
+                @Html.Action("Form", "Search")
+                @*<div class="col-sm-8 col-md-6 search-box m-t-2">
                     <div class="input-group">
                         <input type="text" class="form-control" aria-label="Search here..." placeholder="Search here...">
                         <div class="input-group-btn">
@@ -132,7 +133,7 @@
                             <button type="button" class="btn btn-default btn-search"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-sm-4 col-md-3 cart-btn hidden-xs m-t-2">
                     <button type="button" class="btn btn-default dropdown-toggle" id="dropdown-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <i class="fa fa-shopping-cart"></i> Shopping Cart : 4 items <i class="fa fa-caret-down"></i>
@@ -207,8 +208,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
+                    <li class=""><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li><a href="@Url.Action("Index","Product")">Products</a></li>
                     <li><a href="cart.html">Shopping Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                     <li class="dropdown">

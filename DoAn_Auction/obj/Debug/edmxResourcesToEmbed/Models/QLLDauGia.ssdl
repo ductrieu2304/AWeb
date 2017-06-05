@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AuctionHistories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProID" Type="int" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Time" Type="datetime" />
+  </EntityType>
   <EntityType Name="Auctions">
     <Key>
       <PropertyRef Name="ProID" />
@@ -20,6 +30,7 @@
     <Property Name="Step" Type="money" />
     <Property Name="Seller" Type="int" />
     <Property Name="Quantity" Type="int" />
+    <Property Name="PriceCurrent" Type="money" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -45,6 +56,7 @@
     <Property Name="f_Phone" Type="nchar" MaxLength="13" />
   </EntityType>
   <EntityContainer Name="QLDauGiaModelStoreContainer">
+    <EntitySet Name="AuctionHistories" EntityType="Self.AuctionHistories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Auctions" EntityType="Self.Auctions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />

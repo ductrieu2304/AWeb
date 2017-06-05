@@ -28,5 +28,6 @@ namespace DoAn_Auction.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Auction> Auctions { get; set; }
+        public virtual DbSet<AuctionHistory> AuctionHistories { get; set; }
     }
 }

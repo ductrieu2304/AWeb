@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auctions">
+    <Key>
+      <PropertyRef Name="ProID" />
+    </Key>
+    <Property Name="ProID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProName" Type="nvarchar" MaxLength="40" />
+    <Property Name="FullDes" Type="ntext" />
+    <Property Name="PriceStarting" Type="money" />
+    <Property Name="PriceBuy" Type="money" />
+    <Property Name="CatID" Type="int" />
+    <Property Name="PriceHighest" Type="money" />
+    <Property Name="Customer" Type="int" />
+    <Property Name="TimeStart" Type="datetime" />
+    <Property Name="TimeEnd" Type="datetime" />
+    <Property Name="Adjourning" Type="bit" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Required" Type="int" />
+    <Property Name="Step" Type="money" />
+    <Property Name="Seller" Type="int" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CatID" />
+    </Key>
+    <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CatName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="f_ID" />
+    </Key>
+    <Property Name="f_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="f_Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_Password" Type="nvarchar" MaxLength="255" />
+    <Property Name="f_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="f_DOB" Type="datetime" />
+    <Property Name="f_Level" Type="int" />
+    <Property Name="f_Rate" Type="int" />
+    <Property Name="f_Address" Type="nvarchar" MaxLength="255" />
+    <Property Name="f_Phone" Type="nchar" MaxLength="13" />
+  </EntityType>
+  <EntityContainer Name="QLDauGiaModelStoreContainer">
+    <EntitySet Name="Auctions" EntityType="Self.Auctions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

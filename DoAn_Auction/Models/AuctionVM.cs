@@ -7,6 +7,7 @@ namespace DoAn_Auction.Models
 {
     public class AuctionVM
     {
+        public int ProID { get; set; }
         public string ProName { get; set; }
         public string FullDes { get; set; }
         public decimal PriceStarting { get; set; }

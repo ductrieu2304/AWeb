@@ -30,5 +30,6 @@ namespace DoAn_Auction.Models
         public Nullable<decimal> Step { get; set; }
         public Nullable<int> Seller { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public Nullable<decimal> PriceCurrent { get; set; }
     }
 }

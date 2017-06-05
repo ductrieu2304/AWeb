@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="QLDauGiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuctionHistories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Price" Type="money" />
+          <Property Name="Time" Type="datetime" />
+        </EntityType>
         <EntityType Name="Auctions">
           <Key>
             <PropertyRef Name="ProID" />
@@ -25,6 +35,7 @@
           <Property Name="Step" Type="money" />
           <Property Name="Seller" Type="int" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="PriceCurrent" Type="money" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -50,6 +61,7 @@
           <Property Name="f_Phone" Type="nchar" MaxLength="13" />
         </EntityType>
         <EntityContainer Name="QLDauGiaModelStoreContainer">
+          <EntitySet Name="AuctionHistories" EntityType="Self.AuctionHistories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Auctions" EntityType="Self.Auctions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -81,6 +93,7 @@
             <End Role="Category1" EntitySet="Categories" />
           </AssociationSet>
           <EntitySet Name="Auctions" EntityType="QLDauGiaModel.Auction" />
+          <EntitySet Name="AuctionHistories" EntityType="QLDauGiaModel.AuctionHistory" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -124,6 +137,17 @@
           <Property Name="Step" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Seller" Type="Int32" />
           <Property Name="Quantity" Type="Int32" />
+          <Property Name="PriceCurrent" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="AuctionHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -159,6 +183,7 @@
           <EntitySetMapping Name="Auctions">
             <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
               <MappingFragment StoreEntitySet="Auctions">
+                <ScalarProperty Name="PriceCurrent" ColumnName="PriceCurrent" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Seller" ColumnName="Seller" />
                 <ScalarProperty Name="Step" ColumnName="Step" />
@@ -175,6 +200,17 @@
                 <ScalarProperty Name="FullDes" ColumnName="FullDes" />
                 <ScalarProperty Name="ProName" ColumnName="ProName" />
                 <ScalarProperty Name="ProID" ColumnName="ProID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuctionHistories">
+            <EntityTypeMapping TypeName="QLDauGiaModel.AuctionHistory">
+              <MappingFragment StoreEntitySet="AuctionHistories">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

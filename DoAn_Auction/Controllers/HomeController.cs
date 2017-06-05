@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAn_Auction.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,13 @@ namespace DoAn_Auction.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        QLDauGiaEntities ctx = new QLDauGiaEntities();
+        public ActionResult LoadTOPBID()
+        {
+            var list = ctx.Auctions.OrderByDescending(p => p.Customer).Take(4).ToList();
+            return PartialView("TOPBIDPartial", list);
         }
     }
 }

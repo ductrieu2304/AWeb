@@ -1,0 +1,52 @@
+﻿@using DoAn_Auction.Models
+@model List<Auction>
+        @foreach (var Pro in Model)
+        {
+            <div class="col-sm-4 col-lg-3 box-product-outer">
+                <div class="box-product">
+                    <div class="img-wrapper">
+                        <a href="detail.html">
+                            <img alt="Product" src="/images/demo/polo1.jpg">
+                        </a>
+                        <div class="tags">
+                            <span class="label-tags"><span class="label label-default arrowed">Featured</span></span>
+                        </div>
+                        <div class="tags tags-left">
+                            <span class="label-tags"><span class="label label-danger arrowed-right">Sale</span></span>
+                        </div>
+                        <div class="option">
+                            <a href="#" data-toggle="tooltip" title="Add to Wishlist" class="wishlist"><i class="fa fa-heart"></i></a>
+                        </div>
+                    </div>
+                    <h6><a href="detail.html">@Pro.ProName</a></h6>
+                    <div class="price">
+                        <div>@Pro.PriceStarting <span class="label-tags"><span class="label label-default">-10%</span></span></div>
+                        <span class="price-old">$15.00</span>
+                    </div>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <a href="#">(5 reviews)</a>
+                    </div>
+                </div>
+            </div>
+            @*<li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    @cat.CatName @if (cat.Categories.Count > 0)
+                    {<i class="fa fa-angle-right pull-right"></i>}
+                </a>
+                @if (cat.Categories.Count > 0)
+                {
+                    <ul class="dropdown-menu">
+                        @foreach (var cat_child in cat.Categories)
+                        {
+                            <li><a href="javascript:void(0);">@cat_child.CatName</a></li>
+                        }
+                    </ul>
+                }
+            </li>*@
+        }
+    

@@ -29,6 +29,7 @@
     <EntitySetMapping Name="Auctions">
       <EntityTypeMapping TypeName="QLDauGiaModel.Auction">
         <MappingFragment StoreEntitySet="Auctions">
+          <ScalarProperty Name="PriceCurrent" ColumnName="PriceCurrent" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Seller" ColumnName="Seller" />
           <ScalarProperty Name="Step" ColumnName="Step" />
@@ -45,6 +46,17 @@
           <ScalarProperty Name="FullDes" ColumnName="FullDes" />
           <ScalarProperty Name="ProName" ColumnName="ProName" />
           <ScalarProperty Name="ProID" ColumnName="ProID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuctionHistories">
+      <EntityTypeMapping TypeName="QLDauGiaModel.AuctionHistory">
+        <MappingFragment StoreEntitySet="AuctionHistories">
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
