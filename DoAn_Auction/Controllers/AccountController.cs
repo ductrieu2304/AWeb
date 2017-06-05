@@ -160,11 +160,69 @@ namespace DoAn_Auction.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // POST: Account/Profile
+        // GET: Account/Profile
         [CheckLogin]
         public ActionResult Profile()
         {
+            var ctx = new QLDauGiaEntities();
+            int ID =(int) CurrentContext.GetCurUser().f_ID;
+            var user = ctx.Users.Where(p => p.f_ID == ID).FirstOrDefault();
+            return View(user);
+        }
+
+        // GET: Account/EditProfile
+        [CheckLogin]
+        public ActionResult EditProfile()
+        {
             return View();
+        }
+        // POST: Account/EditProfile
+        [CheckLogin]
+        [HttpPost]
+        public ActionResult EditProfile(RegisterVM model)
+        {
+            using (var ctx = new QLDauGiaEntities())
+            {
+                var user = ctx.Users.Where(p => p.f_Username == model.Username).FirstOrDefault();
+                if(user.f_Password==StringUtils.MD5(model.RawPWD))
+                {
+                    user.f_Name = model.Name;
+                    user.f_Email = model.Email;
+                    user.f_DOB = DateTime.ParseExact(model.DOB, "d/m/yyyy", null);
+                    user.f_Address = model.Address;
+                    user.f_Phone = model.Phone;
+                }
+
+                ctx.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+            }
+            return RedirectToAction("Profile","Account");
+        }
+
+        // GET: Account/EditProfile
+        [CheckLogin]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        // POST: Account/EditProfile
+        [HttpPost]
+        public ActionResult ChangePassword(string RawPWD,string NewRawPWD)
+        {
+            int ID = (int)CurrentContext.GetCurUser().f_ID;
+            using (var ctx = new QLDauGiaEntities())
+            {
+                var user = ctx.Users.Where(p => p.f_ID ==ID).FirstOrDefault();
+                if (user.f_Password == StringUtils.MD5(RawPWD))
+                {
+                    user.f_Password = StringUtils.MD5(NewRawPWD);
+                    ctx.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                    ctx.SaveChanges();
+                    CurrentContext.Destroy();
+                    return RedirectToAction("Index", "Home");
+                }
+                return View();
+            }
         }
     }
 }
