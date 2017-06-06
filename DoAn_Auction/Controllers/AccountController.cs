@@ -54,6 +54,35 @@ namespace DoAn_Auction.Controllers
             }
             return View();
         }
-        
+         public bool IsUsernameUnique(string input)
+        {
+            bool check = true;
+            using (var ctx = new QLDauGiaEntities())
+            {
+                var model = ctx.Users
+                    .Where(p => p.f_Username == input)
+                    .FirstOrDefault();
+                if (model != null)
+                {
+                    check = false;
+                }
+                return check;
+            }
+        }
+        public bool IsEmailUnique(string input)
+        {
+            bool check = true;
+            using (var ctx = new QLDauGiaEntities())
+            {
+                var model = ctx.Users
+                    .Where(p => p.f_Email == input)
+                    .FirstOrDefault();
+                if (model != null)
+                {
+                    check = false;
+                }
+                return check;
+            }
+        }
     }
 }
